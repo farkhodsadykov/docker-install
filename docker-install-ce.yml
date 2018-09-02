@@ -1,0 +1,51 @@
+---
+- hosts: all
+  become: yes
+  connection: ssh
+  tasks:
+    - name: Removing Old version of docker
+      package:
+        pkg: "{{ item }}"
+        state: absent
+      with_items:
+        - docker
+        - docker-client
+        - docker-client-latest
+        - docker-common
+        - docker-latest
+        - docker-latest-logratate
+        - docker-selenux
+        - docker-engine-selenux
+        - docker-engine
+
+    - name: Started installing device-mapper-persistent-data and some need packages
+      action: yum pkg={{ item }}
+      state: installed
+      with_items:
+        - yum-utils
+        - device-mapper-persistent-data
+        - lvm2
+
+    - name: Adding a new repository for docker
+      shell: yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+    - name: Enabling repositories
+      shell: '{{ item }}'
+      with_items:
+        - yum-config-manager --disable docker-ce-edge
+        - yum-config-manager --enable docker-ce-test
+
+    - name: Installing docker-ce ....
+      yum:
+        name: docker-ce
+        state: latest
+
+    - name: Make sure a service is running
+      systemd:
+        state: started
+        name: docker
+
+    - name: enable service docker
+      systemd:
+        name: docker
+        enabled: yes
