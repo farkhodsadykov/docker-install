@@ -1,4 +1,4 @@
-# Installing docker on CentOS7
+# Installing docker wich Ansible to CentOS7
 Connect to your Ansible machine and follow the steps bellow
 ```
 git clone https://github.com/farkhodsadykov/docker-install.git
