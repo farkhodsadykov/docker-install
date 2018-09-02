@@ -12,7 +12,7 @@ ssh-copy-id root@yourserversip
 
 ## Verify
 ```
-ansible all  -u root -i hosts   -m ping
+ansible all -u root -i hosts -m ping
 ```
 
 ## Installing docker to remote machine 
