@@ -8,6 +8,7 @@ cd docker-install
 Pleas before running the ansible-playbook change the hosts file add your servers ip. Then ssh-copy-id as root or user which has sudo permission.
 ```
 ssh-copy-id root@yourserversip
+sed  's/10.0.100.111/hereserverip/g' -i hosts
 ```
 
 ## Verify
@@ -15,10 +16,9 @@ ssh-copy-id root@yourserversip
 ansible all  -u root -i hosts   -m ping
 ```
 
-## Installing docker to remote machine 
+## Installing docker to remote machine
 ```
 ansible-playbook -u root -i hosts docker-install-ce.yml
 ```
 
-
-Thank you :) 
+Thank you :)
