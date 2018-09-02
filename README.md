@@ -7,7 +7,7 @@ cd docker-install
 
 Pleas before running the ansible-playbook change the hosts file add your servers ip. Then ssh-copy-id as root or user which has sudo permission.
 ```
-ssh-copy-id root@yourserversip
+ssh-copy-id root@dockermachineip
 ```
 
 ## Verify
